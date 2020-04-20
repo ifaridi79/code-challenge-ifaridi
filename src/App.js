@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -12,7 +12,7 @@ class App extends React.Component {
   getPosts() {
     axios
       // This is where the data is hosted
-      .get("https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/posts.json")
+      .get(process.env.REACT_APP_S3_URL)
       // Once we get a response and store data, let's change the loading state
       .then(response => {
         this.setState({
