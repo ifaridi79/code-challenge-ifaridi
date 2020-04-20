@@ -142,8 +142,11 @@ ${scannerHome} will be setup in Jenkins as environment variable.
 Please replace with appropriate values:
 
 ECR_REPOSITORY_URI = 'REPLACE_ME'
+
 ECR_REPOSITORY_PROD_URI = 'REPLACE_ME'
+
 ECR_PASSWORD = 'REPLACE_ME'
+
 ECR_USERNAME = 'REPLACE_ME'
 
 Automating Deployment to ECS still to be considered:
