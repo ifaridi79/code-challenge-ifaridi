@@ -20,14 +20,6 @@ pipeline {
         CI = 'true'
     }
     stages {
-        stage('Initialization') {
-        agent any
-            steps {
-                sh 'node --version'
-                sh 'npm --version'
-                echo "Branch: ${env.BRANCH_NAME}"
-            }
-        }
         stage('Code checkout') {
         agent any
           steps {
