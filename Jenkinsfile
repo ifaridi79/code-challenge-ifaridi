@@ -10,7 +10,15 @@ pipeline {
         IMAGE_RELEASE_TAG = "release-${env.BUILD_ID}"
         REPO_URL = 'https://github.com/ifaridi79/code-challenge-ifaridi.git'
     }
-    agent { dockerfile true }
+    agent {
+        docker {
+            image 'node:13.12.0-alpine'
+            args '-p 3000:3000'
+        }
+    }
+    environment {
+        CI = 'true'
+    }
     stages {
         stage('Initialization') {
         agent any
