@@ -10,7 +10,7 @@ pipeline {
         IMAGE_RELEASE_TAG = "release-${env.BUILD_ID}"
         REPO_URL = 'https://github.com/ifaridi79/code-challenge-ifaridi.git'
     }
-    agent any
+    agent { dockerfile true }
     stages {
         stage('Initialization') {
         agent any
@@ -53,7 +53,7 @@ pipeline {
             }
         }
         stage('build Docker Image') {
-        agent { dockerfile true }
+        agent any
           when {
              branch 'development'
           }
@@ -66,7 +66,7 @@ pipeline {
           }
         }
         stage('build Production Image') {
-        agent { dockerfile true }
+        agent any
           when {
              branch 'production'
           }
@@ -85,7 +85,7 @@ pipeline {
             }
         }
         stage('Deploy Image') {
-        agent { dockerfile true }
+        agent any
           when {
              branch 'development'
           }
@@ -104,7 +104,7 @@ pipeline {
           }
         }
         stage('Deploy Production Image') {
-        agent { dockerfile true }
+        agent any
           when {
              branch 'production'
           }
