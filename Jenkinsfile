@@ -2,16 +2,15 @@
 
 pipeline {
     environment {
-        ECR_REPOSITORY_URI = 'REPLACE_ME'
+        ECR_REPOSITORY_URI = 'https://133936308857.dkr.ecr.us-east-1.amazonaws.com'
         ECR_REPOSITORY_PROD_URI = 'REPLACE_ME'
-        ECR_PASSWORD = 'REPLACE_ME'
-        ECR_USERNAME = 'REPLACE_ME'
+        ECR_REGION = 'us-east-1'
+        ECR_USERNAME = 'AWS'
         IMAGE_TAG = "build-${env.BUILD_ID}"
         IMAGE_RELEASE_TAG = "release-${env.BUILD_ID}"
-        REPO_URL = 'https://github.com/reginaldcampbell/code-challenge.git'
+        REPO_URL = 'https://github.com/ifaridi79/code-challenge-ifaridi.git'
     }
     agent { dockerfile true }
-    tools {nodejs "node"}
     stages {
         stage('Initialization') {
         agent any
@@ -93,8 +92,11 @@ pipeline {
           steps{
             script {
                 sh 'echo Build completed on `date`'
+                sh 'echo Fetching ECR login....'
+                sh 'ECR_LOGIN=$(aws ecr get-login --region $ECR_REGION --no-include-email)'
+                sh 'echo Logging in to Amazon ECR....'
+                sh '$ECR_LOGIN'
                 sh 'echo Pushing the Docker images...'
-                sh 'docker login –u ECR_USERNAME –p ECR_PASSWORD –e none $ECR_REPOSITORY_URI'
                 sh 'docker push $ECR_REPOSITORY_URI:latest'
                 sh 'docker push $ECR_REPOSITORY_URI:$IMAGE_TAG'
                 sh 'docker rmi -f $ECR_REPOSITORY_URI:latest $ECR_REPOSITORY_URI:$IMAGE_TAG'
