@@ -10,7 +10,7 @@ pipeline {
         IMAGE_RELEASE_TAG = "release-${env.BUILD_ID}"
         REPO_URL = 'https://github.com/ifaridi79/code-challenge-ifaridi.git'
     }
-
+    agent any
     stages {
         stage('Initialization') {
         agent any
