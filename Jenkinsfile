@@ -2,9 +2,9 @@
 
 pipeline {
     environment {
-        ECR_REPOSITORY_URI = 'https://133936308857.dkr.ecr.us-east-1.amazonaws.com'
+        ECR_REPOSITORY_URI = 'https://297041898255.dkr.ecr.us-east-2.amazonaws.com'
         ECR_REPOSITORY_PROD_URI = 'REPLACE_ME'
-        ECR_REGION = 'us-east-1'
+        ECR_REGION = 'us-east-2'
         ECR_USERNAME = 'AWS'
         IMAGE_TAG = "build-${env.BUILD_ID}"
         IMAGE_RELEASE_TAG = "release-${env.BUILD_ID}"
